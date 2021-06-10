@@ -1,0 +1,14 @@
+{
+  "name": "cruddemo",
+  "version": "1.0.0",
+  "description": "Just a simple crude application to learn",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Suraj Gupta",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
