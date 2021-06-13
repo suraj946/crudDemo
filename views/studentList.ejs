@@ -1,0 +1,71 @@
+<html>
+<head>
+    <style>
+        #student-list-container {
+            margin: 200px;
+        }
+        table,th,tr,td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+        }
+
+        .btn-danger {
+            background-color:red;
+        }
+
+        .btn-secondary {
+            background-color:lightgreen;
+        }
+
+        .btn-primary {
+            background-color:lightskyblue;
+        }
+
+    </style>
+</head>
+<body>
+    Here are the list of students:
+    <div id="student-list-container">
+        <div><a href="/students/create"><button class="btn-primary">Add New Student</button></a></div>
+        <table>
+            <tr>
+                <th>S.N.</th>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+
+            <%
+            students.forEach(function(stud,i) {
+            %>
+            <tr>
+                <td><%=i+1%></td>
+                <td><%=stud.id%></td>
+                <td><%=stud.fname%></td>
+                <td><%=stud.lname%></td>
+                <td><%=stud.address%></td>
+                <%
+                    let id = stud.id;
+                    let url = '/students/delete?id='+id;
+                    let url2 = '/students/edit?id='+id;
+                %>
+                <td><a href="<%=url2%>"><button class="btn-secondary">edit</button></a> <a href="<%=url%>"><button class="btn-danger">Delete</button></a></td>
+            </tr>
+            <%
+            });
+            %>
+
+
+        </table>
+    </div>
+
+
+
+</body>
+</html>

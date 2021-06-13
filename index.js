@@ -1,58 +1,27 @@
-console.log('inside index.js file');
 
-/*var http = require('http');
-http.createServer(function(req,res) {
-    res.end('worked');
-}).listen(1350);*/
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 
 
+const StudentController = require('./StudentController.js');
 
-let express = require('express');
-let app = express();
 
-app.get('/students',getStudents);
-app.get('/teachers',getTeachers);
+app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({ extended: true }));
 app.listen(1350);
+console.log("app started on port 1350");
 
+app.get("/",  function(req, res){
+    res.render('welcome');
+});
 
-
-
-
-
-
-function getStudents(req,res) {
-    console.log('req.url',req.url);
-    console.log('req.method',req.method);
-    let students = [
-        {
-            name: 'Ajay',
-            roll: 1,
-            address: 'Bariyarpur'
-        },
-        {
-            name: 'Sandip',
-            roll: 2,
-            address: 'Bariyarpur'
-        }
-    ];
-    res.send(students);
-}
-
-function getTeachers(req,res) {
-    let teachers = [
-        {
-            name: 'Umesh',
-            subject: 'Economics',
-            address: 'Bariyarpur'
-        },
-        {
-            name: 'Pandiji',
-            subject: 'English',
-            address: 'Bariyarpur'
-        }
-    ];
-    res.send(teachers);
-}
+app.get('/students', StudentController.getStudentList);
+app.get('/students/delete',StudentController.deleteStudent);
+app.get('/students/create',StudentController.createStudentForm);
+app.post('/students/create',StudentController.createStudent);
+app.get('/students/edit',StudentController.editStudentForm);
+app.post('/students/edit',StudentController.editStudent);
 
 
 
